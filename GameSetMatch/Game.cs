@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace GameSetMatch
@@ -40,7 +41,20 @@ namespace GameSetMatch
 
         public string NameWinners()
         {
+            if (IsEndGame())
+            {
+                if(firstPlayerScore > secondPlayerScore)
+                {
+                    return firstPlayer.PlayerName;
+                }
+                else
+                {
+                    return secondPlayer.PlayerName;
+                }
+            }
 
+            return string.Empty;
         }
+
     }
 }
