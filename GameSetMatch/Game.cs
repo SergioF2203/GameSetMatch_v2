@@ -5,45 +5,47 @@ using System.Text;
 
 namespace GameSetMatch
 {
-    class Game
+    public class Game
     {
-        private Player firstPlayer;
-        private Player secondPlayer;
+        private readonly Player firstPlayer;
+        private readonly Player secondPlayer;
 
-        private int firstPlayerScore = 0;
-        private int secondPlayerScore = 0;
+        public int FirstPlayerScore { get; set; } = 0;
+        public int SecondPlayerScore { get; set; } = 0;
 
-        public bool Tie { get; set; }
-
-        public Game(string firstPlayerName, string secondPlayerName)
+        public Game()
         {
-            firstPlayer = new Player(firstPlayerName);
-            secondPlayer = new Player(secondPlayerName);
+            firstPlayer = new Player();
+            secondPlayer = new Player();
+        }
+
+        public Game(Player player1, Player player2)
+        {
+            firstPlayer = player1;
+            secondPlayer = player2;
         }
 
         public void AddPoint(string playerName)
         {
-            firstPlayerScore = playerName == firstPlayer.PlayerName ? firstPlayerScore + 1 : firstPlayerScore;
-            secondPlayerScore = playerName == secondPlayer.PlayerName ? secondPlayerScore + 1 : secondPlayerScore;
+            FirstPlayerScore = playerName == firstPlayer.PlayerName ? FirstPlayerScore + 1 : FirstPlayerScore;
+            SecondPlayerScore = playerName == secondPlayer.PlayerName ? SecondPlayerScore + 1 : SecondPlayerScore;
         }
 
         public bool IsEndGame()
         {
-            if((firstPlayerScore >= 4 || secondPlayerScore >= 4) &&(Math.Abs(firstPlayerScore - secondPlayerScore) >= 2))
+            if ((FirstPlayerScore >= 4 || SecondPlayerScore >= 4) && (Math.Abs(FirstPlayerScore - SecondPlayerScore) >= 2))
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public string NameWinners()
         {
             if (IsEndGame())
             {
-                if(firstPlayerScore > secondPlayerScore)
+                if (FirstPlayerScore > SecondPlayerScore)
                 {
                     return firstPlayer.PlayerName;
                 }
